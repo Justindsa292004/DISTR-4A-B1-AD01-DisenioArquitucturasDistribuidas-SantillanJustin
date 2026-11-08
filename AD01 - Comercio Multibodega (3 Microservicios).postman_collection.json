@@ -1,0 +1,426 @@
+{
+  "info": {
+    "_postman_id": "cf20ba49-35b5-40e7-8633-c17f6f77843f",
+    "name": "AD01 - Comercio Multibodega (3 Microservicios)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "60049347",
+    "_collection_link": "https://go.postman.co/collection/60049347-cf20ba49-35b5-40e7-8633-c17f6f77843f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Catalogo.Api (Puerto 7017)",
+      "item": [
+        {
+          "name": "1.1 Crear Categoria (201 Created)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Laptops y Computadores\",\n  \"descripcion\": \"Equipos portátiles y de escritorio\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7017/api/categorias",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7017",
+              "path": [
+                "api",
+                "categorias"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.2 Crear Marca (201 Created)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"ASUS\",\n  \"paisOrigen\": \"Taiwán\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7017/api/marcas",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7017",
+              "path": [
+                "api",
+                "marcas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.3 Crear Producto (201 Created)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCategoria\": 1,\n  \"idMarca\": 1,\n  \"nombre\": \"ASUS ROG Strix G16\",\n  \"sku\": \"ASUS-ROG-G16-001\",\n  \"precio\": 1450.00,\n  \"estado\": \"Activo\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7017/api/productos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7017",
+              "path": [
+                "api",
+                "productos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.4 Listar Productos (200 OK)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7017/api/productos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7017",
+              "path": [
+                "api",
+                "productos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.5 Validación Precio Inválido (400 Bad Request)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCategoria\": 1,\n  \"idMarca\": 1,\n  \"nombre\": \"Producto Error\",\n  \"sku\": \"ERR-01\",\n  \"precio\": 0,\n  \"estado\": \"Activo\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7017/api/productos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7017",
+              "path": [
+                "api",
+                "productos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.6 Producto Inexistente (404 Not Found)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7017/api/productos/999",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7017",
+              "path": [
+                "api",
+                "productos",
+                "999"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Inventario.Api (Puerto 7293)",
+      "item": [
+        {
+          "name": "2.1 Crear Bodega (201 Created)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Bodega Central Norte\",\n  \"ciudad\": \"Quito\",\n  \"direccion\": \"Av. Galo Plaza Lasso y De Los Cipreses\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7293/api/bodegas",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7293",
+              "path": [
+                "api",
+                "bodegas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.2 Registrar Movimiento Entrada (201 Created)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": 1,\n  \"idBodega\": 1,\n  \"tipo\": \"Entrada\",\n  \"cantidad\": 20\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7293/api/movimientos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7293",
+              "path": [
+                "api",
+                "movimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.3 Consultar Existencias (200 OK)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7293/api/existencias",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7293",
+              "path": [
+                "api",
+                "existencias"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.4 Crear Reserva de Stock (201 Created)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": 1,\n  \"idBodega\": 1,\n  \"cantidad\": 2,\n  \"estado\": \"Pendiente\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7293/api/reservas",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7293",
+              "path": [
+                "api",
+                "reservas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.5 Error Stock Insuficiente (400 Bad Request)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": 1,\n  \"idBodega\": 1,\n  \"cantidad\": 500,\n  \"estado\": \"Pendiente\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7293/api/reservas",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7293",
+              "path": [
+                "api",
+                "reservas"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Pedidos.Api (Puerto 7153)",
+      "item": [
+        {
+          "name": "3.1 Crear Cliente (201 Created)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombres\": \"Justin Santillan\",\n  \"cedula\": \"1723456789\",\n  \"correo\": \"justin.santillan@correo.com\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7153/api/clientes",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7153",
+              "path": [
+                "api",
+                "clientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.2 Crear Pedido con Detalle (201 Created)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": 1,\n  \"estado\": \"Confirmado\",\n  \"detalles\": [\n    {\n      \"idProducto\": 1,\n      \"cantidad\": 2,\n      \"precioUnitario\": 1450.00\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7153/api/pedidos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7153",
+              "path": [
+                "api",
+                "pedidos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.3 Listar Pedidos (200 OK)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7153/api/pedidos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7153",
+              "path": [
+                "api",
+                "pedidos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.4 Cliente Inexistente en Pedido (404 Not Found)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": 999,\n  \"estado\": \"Creado\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7153/api/pedidos",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7153",
+              "path": [
+                "api",
+                "pedidos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
